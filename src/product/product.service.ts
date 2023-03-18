@@ -98,11 +98,12 @@ export class ProductService {
 		return product
 	}
 
-	// TO DO
 	async byCategory(categorySlug: string) {
-		const product = await this.prisma.product.findUnique({
+		const product = await this.prisma.product.findMany({
 			where: {
-				slug: categorySlug
+				category: {
+					slug: categorySlug
+				}
 			},
 			select: productReturnObjectFullest
 		})

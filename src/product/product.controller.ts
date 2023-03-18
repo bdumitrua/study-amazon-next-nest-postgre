@@ -9,20 +9,20 @@ import {
 	Put,
 	Query,
 	UsePipes
-} from '@nestjs/common'
-import { ValidationPipe } from '@nestjs/common/pipes'
-import { Auth } from 'src/auth/decorators/auth.decorator'
-import { GetAllProductsDto } from './dto/get-all.product.dto'
-import { ProductDto } from './dto/product.dto'
-import { ProductService } from './product.service'
-
+} from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common/pipes';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { GetAllProductsDto } from './dto/get-all.product.dto';
+import { ProductDto } from './dto/product.dto';
+import { ProductService } from './product.service';
+  
 @Controller('products')
 export class ProductController {
 	constructor(private readonly productService: ProductService) {}
 
 	@UsePipes(new ValidationPipe())
 	@Get()
-	async getAll(@Query() queryDto: GetAllProductsDto) {
+	async getAll(@Query() queryDto: GetAllProductsDto) { 
 		return this.productService.getAll(queryDto)
 	}
 
@@ -37,7 +37,7 @@ export class ProductController {
 	}
 
 	@Get('by-category/:categorySlug')
-	async getProductsByCategory(@Param('categorySlug') categorySlug: string) {
+	async getProductByCategory(@Param('categorySlug') categorySlug: string) {
 		return this.productService.byCategory(categorySlug)
 	}
 
