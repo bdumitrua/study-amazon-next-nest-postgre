@@ -2,9 +2,9 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { Prisma } from '@prisma/client'
 import { hash } from 'argon2'
 
-import { UserDto } from './user.dto'
 import { PrismaService } from './../prisma.service'
 import { returnUserObject } from './return-user.object'
+import { UserDto } from './user.dto'
 
 @Injectable()
 export class UserService {
@@ -31,7 +31,7 @@ export class UserService {
 		})
 
 		if (!user) {
-			throw new Error(`User with id ${id} not found`)
+			throw new NotFoundException(`User with id ${id} not found`)
 		}
 
 		return user
