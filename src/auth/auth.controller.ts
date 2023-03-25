@@ -2,9 +2,8 @@ import { Controller, HttpCode, Post } from '@nestjs/common'
 import { Body, UsePipes } from '@nestjs/common/decorators'
 import { ValidationPipe } from '@nestjs/common/pipes'
 
-import { Auth } from './decorators/auth.decorator'
-import { AuthDto } from './dto/auth.dto'
 import { AuthService } from './auth.service'
+import { AuthDto } from './dto/auth.dto'
 import { RefreshTokenDto } from './dto/refresh-token.dto'
 
 @Controller('auth')
@@ -20,7 +19,6 @@ export class AuthController {
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
-	@Auth()
 	@Post('login/access-token')
 	async getNewTokens(@Body() dto: RefreshTokenDto) {
 		return this.authService.getNewTokens(dto.refreshToken)
