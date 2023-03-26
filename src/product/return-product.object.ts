@@ -9,9 +9,15 @@ export const productReturnObject: Prisma.ProductSelect = {
 	name: true,
 	price: true,
 	createdAt: true,
-	slug: true
-}
+	slug: true,
+	category: { select: returnCategoryObject },
+	reviews: {
+		select: returnReviewObject
+	},
+} 
 
+// TODO
+// Удалить
 export const productReturnObjectFullest: Prisma.ProductSelect = {
 	...productReturnObject,
 	reviews: {
