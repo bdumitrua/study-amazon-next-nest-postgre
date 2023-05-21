@@ -1,19 +1,16 @@
 import { faker } from '@faker-js/faker'
-import { Injectable, BadRequestException } from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
+import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception'
 import { JwtService } from '@nestjs/jwt'
 import { User } from '@prisma/client'
-import { UnauthorizedException } from '@nestjs/common/exceptions/unauthorized.exception'
 
-import { AuthDto } from './dto/auth.dto'
-import { PrismaService } from 'src/prisma.service'
 import { hash, verify } from 'argon2'
+import { PrismaService } from 'src/prisma.service'
+import { AuthDto } from './dto/auth.dto'
 
 @Injectable()
 export class AuthService {
-	constructor(
-		private readonly prisma: PrismaService,
-		private jwt: JwtService
-	) {}
+	constructor(private readonly prisma: PrismaService, private jwt: JwtService) {}
 
 	async login(dto: AuthDto) {
 		const user = await this.validateUser(dto)
